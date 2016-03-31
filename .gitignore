@@ -26,7 +26,6 @@ local.properties
 Thumbs.db
 
 # OSX files
-.DS_Store
 
 # Eclipse project files
 .classpath
@@ -35,5 +34,5 @@ Thumbs.db
 # Android Studio
 .idea
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
-.gradle
 build/
+*.iml

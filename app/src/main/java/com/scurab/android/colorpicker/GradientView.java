@@ -96,16 +96,12 @@ public class GradientView extends View {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.GradientView);
             for (int i = 0, n = typedArray.getIndexCount(); i < n; i++) {
                 int index = typedArray.getIndex(i);
-                switch (index) {
-                    case R.styleable.GradientView_radius:
-                        setRadius(typedArray.getDimensionPixelSize(index, 0));
-                        break;
-                    case R.styleable.GradientView_pointerDrawable:
-                        setPointerDrawable(typedArray.getDrawable(index));
-                        break;
-                    case R.styleable.GradientView_lockPointerInBounds:
-                        setLockPointerInBounds(typedArray.getBoolean(index, false));
-                        break;
+                if (index == R.styleable.GradientView_radius) {
+                    setRadius(typedArray.getDimensionPixelSize(index, 0));
+                } else if (index == R.styleable.GradientView_pointerDrawable) {
+                    setPointerDrawable(typedArray.getDrawable(index));
+                } else if (index == R.styleable.GradientView_lockPointerInBounds) {
+                    setLockPointerInBounds(typedArray.getBoolean(index, false));
                 }
             }
             typedArray.recycle();
@@ -180,7 +176,7 @@ public class GradientView extends View {
 
     }
 
-    private void onDrawPointer(Canvas canvas){
+    private void onDrawPointer(Canvas canvas) {
         if (mPointerDrawable != null) {
             int vh = getHeight();
             int pwh = mPointerWidth >> 1;
@@ -229,7 +225,7 @@ public class GradientView extends View {
             mPointerWidth = pw;
             if (h < ph) {
                 mPointerHeight = h;
-                mPointerWidth = (int) (pw * (h / (float)ph));
+                mPointerWidth = (int) (pw * (h / (float) ph));
             }
             mPointerDrawable.setBounds(0, 0, mPointerWidth, mPointerHeight);
             updatePointerPosition();
@@ -249,10 +245,11 @@ public class GradientView extends View {
 
     /**
      * Set radius for gradient rectangle
+     *
      * @param radius
      */
     public void setRadius(float radius) {
-        if(radius != mRadius) {
+        if (radius != mRadius) {
             mRadius = radius;
             mRadius = radius;
             invalidate();
@@ -283,6 +280,7 @@ public class GradientView extends View {
 
     /**
      * Update color based on touch events
+     *
      * @param x
      * @param y
      */
@@ -316,6 +314,7 @@ public class GradientView extends View {
 
     /**
      * Switch view into brightness gradient only
+     *
      * @param isBrightnessGradient
      */
     public void setIsBrightnessGradient(boolean isBrightnessGradient) {
@@ -324,6 +323,7 @@ public class GradientView extends View {
 
     /**
      * Get current selectec color
+     *
      * @return
      */
     public int getSelectedColor() {
@@ -332,6 +332,7 @@ public class GradientView extends View {
 
     /**
      * Update current color
+     *
      * @param selectedColor
      */
     public void setColor(int selectedColor) {
@@ -359,6 +360,7 @@ public class GradientView extends View {
 
     /**
      * Get start color for gradient
+     *
      * @param hsv
      * @return
      */
@@ -369,7 +371,7 @@ public class GradientView extends View {
             int color = Color.HSVToColor(hsv);
             hsv[2] = oldV;
             return color;
-        }else{
+        } else {
             return Color.HSVToColor(hsv);
         }
     }
@@ -387,6 +389,7 @@ public class GradientView extends View {
 
     /**
      * Add reference for brightness view
+     *
      * @param brightnessGradient
      */
     public void setBrightnessGradientView(GradientView brightnessGradient) {
@@ -405,8 +408,8 @@ public class GradientView extends View {
     }
 
     //region HSL math
+
     /**
-     *
      * @param x x coordinate of gradient
      * @return
      */
@@ -416,7 +419,7 @@ public class GradientView extends View {
     }
 
     private int hueToPoint(float hue) {
-        return (int)(mGradientRect.left + ((hue * mGradientRect.width()) / 360));
+        return (int) (mGradientRect.left + ((hue * mGradientRect.width()) / 360));
     }
 
     /**
@@ -481,12 +484,12 @@ public class GradientView extends View {
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if(!(state instanceof SavedState)) {
+        if (!(state instanceof SavedState)) {
             super.onRestoreInstanceState(state);
             return;
         }
 
-        SavedState ss = (SavedState)state;
+        SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
 
         mIsBrightnessGradient = ss.isBrightnessGradient;
