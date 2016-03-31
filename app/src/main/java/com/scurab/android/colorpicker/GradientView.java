@@ -96,7 +96,7 @@ public class GradientView extends View {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.GradientView);
             for (int i = 0, n = typedArray.getIndexCount(); i < n; i++) {
                 int index = typedArray.getIndex(i);
-                if (index == R.styleable.GradientView_radius) {
+                if (index == R.styleable.GradientView_GVradius) {
                     setRadius(typedArray.getDimensionPixelSize(index, 0));
                 } else if (index == R.styleable.GradientView_pointerDrawable) {
                     setPointerDrawable(typedArray.getDrawable(index));

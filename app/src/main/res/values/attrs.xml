@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="GradientView">
         <attr name="pointerDrawable" format="reference"/>
-        <attr name="radius" format="dimension"/>
+        <attr name="GVradius" format="dimension"/>
         <attr name="lockPointerInBounds" format="boolean"/>
     </declare-styleable>
 </resources>
